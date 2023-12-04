@@ -1,5 +1,4 @@
-function border(I,E,sigma)
-global Z
+function Z = border(I,E,sigma)
 
 delta = I(6) - I(7);
 %beta = I(2) - I(3);
@@ -22,3 +21,4 @@ Z_numerator(1) = -(E*delta/(2*sigma^2))+sqrt((E*delta/(2*sigma^2))^2-...
 Z_denominator = 2*(b+(E*k/(2*sigma^2)));
 Z = Z_numerator(1)/Z_denominator;
 
+end

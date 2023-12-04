@@ -1,5 +1,4 @@
-function f = func2(t,x) %Название
-global Z
+function f = func2(t,x,Z) %Название
 f = [x(2);x(3);
     -1.436*x(3)-0.36*x(2)-0.693*Z*x(5)-0.411*x(1)-0.955*Z*x(4)+0.126*cos(t);
     x(5);x(6);
