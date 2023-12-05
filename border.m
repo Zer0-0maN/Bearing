@@ -18,7 +18,7 @@ Z_numerator(1) = -(E*delta/(2*sigma^2))+sqrt((E*delta/(2*sigma^2))^2-...
     -4*(b+(E*k/(2*sigma^2))*(alpha1/sigma^4-alpha3/sigma^2+b)));
 %Z_numerator(2) = -(E*delta/(2*sigma^2))-sqrt((E*delta/(2*sigma^2))^2-...
 %    -4*(b+(E*k/(2*sigma^2))*(alpha1/sigma^4-alpha3/sigma^2+b)));
-Z_denominator = 2*(b+(E*k/(2*sigma^2)));
+Z_denominator = 2000*(b+(E*k/(2*sigma^2)));
 Z = Z_numerator(1)/Z_denominator;
 
 end
