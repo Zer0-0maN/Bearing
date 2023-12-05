@@ -11,7 +11,7 @@ E = 59.69; sigma = 1.667;
 Z = border(I,E,sigma);
 %Z = 0;
 %Определение границы расчета
-T1 = 0.008;
+T1 = 1;
 %Задание начальных параметров
 zero = startFunc1(0);
 f_numeric = double(subs(zero,0));

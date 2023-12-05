@@ -38,6 +38,7 @@ if enum == 1 % Для сегментного подшипника
     func = @(t, y) func2(t, y, Z);
 end
 [t,h]=ode45(func,[0,T1],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
+T = t./314;
 %Свойство печати
 set(0,'DefaultAxesFontSize',12,'DefaultAxesFontName','Times New Roman');
 set(0,'DefaultTextFontSize',12,'DefaultTextFontName','Times New Roman'); 
@@ -46,7 +47,7 @@ x = h(:,1);
 xd = h(:,7);
 tiledlayout(2,1)
 graf1 = nexttile;
-plot(graf1,t,x,'r-',t,xd,'b-')
+plot(graf1,T,x,'r-',T,xd,'b-')
 title(graf1,'В плоскости Х')  
 ylabel(graf1,'Перемещение')
 xlabel(graf1,'Время')
@@ -56,7 +57,7 @@ grid on;
 y = h(:,4);
 yd = h(:,8);
 graf2 = nexttile;
-plot(graf2,t,y,'r-',t,yd,'b-');
+plot(graf2,T,y,'r-',T,yd,'b-');
 title(graf2,'В плоскости Y')  
 ylabel(graf2,'Перемещение')
 xlabel(graf2,'Время')
