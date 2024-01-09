@@ -8,12 +8,13 @@ I(5) = 10.488; I(6) = 1.323;
 I(7) = 1.284; I(8) = 73.156;
 E = 59.69; sigma = 1.667;
 %Определение шага границы устойчивости и числа точек
-z = 0.01;
+z = 0.001;
 k = 1000; 
 %Определение границы расчета
-T1 = 2/50;
+T1 = 1/6;
+T2 = 1/4;
 %Задание начальных параметров
-zero = startFunc1(0);
+zero = startFunc_elliptic(0);
 f_numeric = double(subs(zero,0));
 x0 = f_numeric(1); dtx0 = f_numeric(2); dt2x0 = f_numeric(3);
 y0 = f_numeric(4); dty0 = f_numeric(5); dt2y0 = f_numeric(6);
@@ -26,13 +27,14 @@ y_el_d = zeros(1,k);
 Z = zeros(1,k);
 %Решение уравнение с шагом z
 for i = 1:k
-    f = @(t, y) func1(t, y, z*(i-1));
+    f = @(t, y) func_elliptic(t, y, z*(i-1));
     [t,h]=ode45(f,[0,T1],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
+    [t2,h2]=ode45(f,[0,T2],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
     Z(i) = z*(i-1);
     x_el(i) = max(abs(h(:, 1)));
-    y_el(i) = max(abs(h(:, 4)));
+    y_el(i) = max(abs(h2(:, 4)));
     x_el_d(i) = max(abs(h(:, 7)));
-    y_el_d(i) = max(abs(h(:, 8)));
+    y_el_d(i) = max(abs(h2(:, 8)));
 end
 %Свойство печати
 set(0,'DefaultAxesFontSize',12,'DefaultAxesFontName','Times New Roman');

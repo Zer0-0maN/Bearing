@@ -13,13 +13,13 @@ Z = border(I,E,sigma);
 %Определение границы расчета
 T1 = 1;
 %Задание начальных параметров
-zero = startFunc1(0);
+zero = startFunc_elliptic(0);
 f_numeric = double(subs(zero,0));
 x0 = f_numeric(1); dtx0 = f_numeric(2); dt2x0 = f_numeric(3);
 y0 = f_numeric(4); dty0 = f_numeric(5); dt2y0 = f_numeric(6);
 xd0 = f_numeric(7); yd0 = f_numeric(8);
 %Решение уравнение
-func = @(t, y) func1(t, y, Z);
+func = @(t, y) func_elliptic(t, y, Z);
 [t,h]=ode45(func,[0,T1],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
 %Свойство печати
 set(0,'DefaultAxesFontSize',12,'DefaultAxesFontName','Times New Roman');

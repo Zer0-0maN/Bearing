@@ -8,12 +8,13 @@ I(5) = 2.23; I(6) = 0;
 I(7) = 0; I(8) = 4.293;
 E = 3.638; sigma = 1.667;
 %Определение шага границы устойчивости и числа точек
-z = 0.01;
+z = 0.001;
 k = 1000; 
 %Определение границы расчета
-T1 = 2/50;
+T1 = 0.325;
+T2 = 3*T1/4;
 %Задание начальных параметров
-zero = startFunc2(0);
+zero = startFunc_segment(0);
 f_numeric = double(subs(zero,0));
 x0 = f_numeric(1); dtx0 = f_numeric(2); dt2x0 = f_numeric(3);
 y0 = f_numeric(4); dty0 = f_numeric(5); dt2y0 = f_numeric(6);
@@ -26,13 +27,14 @@ y_el_d = zeros(1,k);
 Z = zeros(1,k);
 %Решение уравнение с шагом z
 for i = 1:k
-    f = @(t, y) func2(t, y, z*(i-1));
+    f = @(t, y) func_segment(t, y, z*(i-1));
     [t,h]=ode45(f,[0,T1],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
+    [t2,h2]=ode45(f,[0,T2],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
     Z(i) = z*(i-1);
-    x_el(i) = max(abs(h(:, 1)));
-    y_el(i) = max(abs(h(:, 4)));
-    x_el_d(i) = max(abs(h(:, 7)));
-    y_el_d(i) = max(abs(h(:, 8)));
+    x_el(i) = max(abs(h(:, 1)))/10000;
+    y_el(i) = max(abs(h2(:, 4)))/1000;
+    x_el_d(i) = max(abs(h(:, 7)))/10000;
+    y_el_d(i) = max(abs(h2(:, 8)))/1000;
 end
 %Свойство печати
 set(0,'DefaultAxesFontSize',12,'DefaultAxesFontName','Times New Roman');
