@@ -1,17 +1,10 @@
-function f = startFunc_segment(enum) %Для сегментных подшипников
+function f = startFunc_segment(t,enum) %Для сегментных подшипников
 global deltaX deltaY
-if enum == 0 % без дисбаланса
-    f(1) = 0;
-    f(2) = 0;
-    f(3) = 0;
-    f(4) = 0;
-    f(5) = 0;
-    f(6) = 0;
-    f(7) = 0;
-    f(8) = 0;
+syms t
+if enum == 0  % Для ротора без дисбаланса 
+    f = zeros(1, 8);
 end
 if enum == 1 % Для ротора с дисбалансом 
-    t = 0;
     omega = 314;
     % omega = 1;
     f(1) = 27*10^-6*cos(omega*t-2.14675)/deltaX;

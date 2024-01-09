@@ -1,4 +1,4 @@
-function graph = Border_graph(enum,T1) %Название
+function graph = Border_graph(typeEnum,T1,imbalanceBool) %Название
 global deltaX deltaY
 deltaX=0.0002912; deltaY = 0.00005824;
 T1 = T1*314;
@@ -6,11 +6,11 @@ T1 = T1*314;
 z = 0.01;
 k = 100; 
 %Задание начальных параметров
-if enum == 0 % Для эллиптического подшипника 
-    zero = startFunc_elliptic(0);
+if typeEnum == 0 % Для эллиптического подшипника 
+    zero = startFunc_elliptic(0,imbalanceBool);
 end
-if enum == 1 % Для сегментного подшипника 
-    zero = startFunc_segment(0);
+if typeEnum == 1 % Для сегментного подшипника 
+    zero = startFunc_segment(0,imbalanceBool);
 end
 f_numeric = double(subs(zero,0));
 x0 = f_numeric(1); dtx0 = f_numeric(2); dt2x0 = f_numeric(3);
@@ -25,10 +25,10 @@ Z = zeros(1,k);
 %Решение уравнение с шагом z
 for i = 1:k
     %Решение уравнение
-    if enum == 0 % Для эллиптического подшипника 
+    if typeEnum == 0 % Для эллиптического подшипника 
         func = @(t, y) func_elliptic(t, y, z*(i-1));
     end
-    if enum == 1 % Для сегментного подшипника 
+    if typeEnum == 1 % Для сегментного подшипника 
         func = @(t, y) func_segment(t, y, z*(i-1));
     end
     [t,h]=ode45(func,[0,T1],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
@@ -59,10 +59,10 @@ xlabel(graf2,'Значение a/c')
 legend(graf2,'Цапфа','Диск')
 grid on;
 %Имя графика
-if enum == 0 % Для эллиптического подшипника 
+if typeEnum == 0 % Для эллиптического подшипника 
     set(gcf,'Name', 'Эллиптический подшипник');
 end
-if enum == 1 % Для сегментного подшипника 
+if typeEnum == 1 % Для сегментного подшипника 
     set(gcf,'Name', 'Сегментный подшипник');
 end
 set(gcf,'Units', 'normalized', 'OuterPosition', [0 0.1 1 0.9]);

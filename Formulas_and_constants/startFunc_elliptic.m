@@ -1,17 +1,10 @@
-function f = startFunc_elliptic(enum) % Для эллиптического подшипника 
+function f = startFunc_elliptic(t,enum) % Для эллиптического подшипника 
 global deltaX deltaY
-if enum == 0 % 
-    f(1) = 0;
-    f(2) = 0;
-    f(3) = 0;
-    f(4) = 0;
-    f(5) = 0;
-    f(6) = 0;
-    f(7) = 0;
-    f(8) = 0;
+syms t
+if enum == 0  % Для ротора без дисбаланса 
+    f = zeros(1, 8);
 end
-if enum == 1 % Для ротора с дисбалансом 
-    t = 0;
+if enum == 1        % Для ротора с дисбалансом 
     omega = 314;
     % omega = 1;
     f(1) = 33*10^-6*cos(omega*t-1.88496)/deltaX;
