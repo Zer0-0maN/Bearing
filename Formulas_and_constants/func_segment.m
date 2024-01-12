@@ -1,15 +1,16 @@
 function f = func_segment(t,x,Z) %Название
 
+
 function fPulseX = FPx(t)
-fPulseX = 10^-6*sin(t);
+    fPulseX = 0; %10^-6*sin(omega*t);
 end
 
 function fPulseY = FPy(t)
-fPulseY = 10^-6*sin(t);
+    fPulseY = 0; %10^-6*sin(omega*t);
 end
 
-omega = 314;
-% omega = 1;
+%omega = 314;
+omega = 1.667;
 
 f = [x(2);x(3);
     -1.436*x(3)-0.36*x(2)-0.693*Z*x(5)-0.411*x(1)-0.955*Z*x(4)+...

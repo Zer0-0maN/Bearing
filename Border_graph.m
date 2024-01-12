@@ -1,10 +1,9 @@
 function graph = Border_graph(typeEnum,T1,imbalanceBool) %Название
 global deltaX deltaY
 deltaX=0.0002912; deltaY = 0.00005824;
-T1 = T1*314;
 %Определение шага границы устойчивости и числа точек
-z = 0.01;
-k = 100; 
+z = 0.001;
+k = 40; 
 %Задание начальных параметров
 if typeEnum == 0 % Для эллиптического подшипника 
     zero = startFunc_elliptic(0,imbalanceBool);

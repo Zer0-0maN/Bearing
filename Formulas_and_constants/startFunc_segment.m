@@ -5,8 +5,8 @@ if enum == 0  % Для ротора без дисбаланса
     f = zeros(1, 8);
 end
 if enum == 1 % Для ротора с дисбалансом 
-    omega = 314;
-    % omega = 1;
+    %omega = 314;
+    omega = 1.667;
     f(1) = 27*10^-6*cos(omega*t-2.14675)/deltaX;
     f(2) = diff(f(1));
     f(3) = diff(f(2));
