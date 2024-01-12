@@ -1,11 +1,19 @@
-function f = func_elliptic(t,x,Z) %Название
+function f = func_elliptic(t,x,Z,impulseX,impulseY) %Название
 
-function fPulseX = FPx(t)  
-    fPulseX(t) = impulse(1,300); %10^-6*sin(t);
+function fPulseX = FPx(t)
+    if impulseX == 0
+        fPulseX = 0;
+    else
+        fPulseX = impulse(t,1,impulseX);
+    end
 end
 
 function fPulseY = FPy(t)
-    fPulseY(t)  = impulse(1,300); %10^-6*sin(t);
+    if impulseY == 0
+        fPulseY = 0;
+    else
+        fPulseY = impulse(t,1,impulseY);
+    end
 end
 
 %omega = 314;

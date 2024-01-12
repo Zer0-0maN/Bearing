@@ -1,8 +1,9 @@
-function graph = Moving_graph() %typeEnum,T1,imbalanceBool) %Название
-typeEnum = 0; %0 для эллиптического подшипника; 1 для сегментного;
-T1 = 600;
-imbalanceBool = 0; %0 без дисбаланса; 1 с дисбалансом ротора;
-
+function graph = Moving_graph(typeEnum,T1,imbalanceBool,impulseBool) %Название
+% [Test_block]
+% typeEnum = 0; %0 для эллиптического подшипника; 1 для сегментного;
+% T1 = 300;
+% imbalanceBool = 0; %0 без дисбаланса; 1 с дисбалансом ротора;
+% impulseBool = 0; %0 нет возумещения; 1 есть возумещение;
 global deltaX deltaY
 deltaX=0.0002912; deltaY = 0.00005824;
 sigma = 314;
@@ -23,10 +24,10 @@ y0 = f_numeric(4); dty0 = f_numeric(5); dt2y0 = f_numeric(6);
 xd0 = f_numeric(7); yd0 = f_numeric(8);
 %Решение уравнение
 if typeEnum == 0 % Для эллиптического подшипника 
-    func = @(t, y) func_elliptic(t, y, Z);
+    func = @(t, y) func_elliptic(t, y, Z, impulseBool,impulseBool);
 end
 if typeEnum == 1 % Для сегментного подшипника 
-    func = @(t, y) func_segment(t, y, Z);
+    func = @(t, y) func_segment(t, y, Z, impulseBool,impulseBool);
 end
 [t,h]=ode45(func,[0,T1],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
 %Свойство печати

@@ -1,12 +1,19 @@
-function f = func_segment(t,x,Z) %Название
+function f = func_segment(t,x,Z,impulseX,impulseY) %Название
 
-
-function fPulseX = FPx(t)
-    fPulseX = 0; %10^-6*sin(omega*t);
+    function fPulseX = FPx(t)
+    if impulseX == 0
+        fPulseX = 0;
+    else
+        fPulseX = impulse(t,1,impulseBoolX);
+    end
 end
 
 function fPulseY = FPy(t)
-    fPulseY = 0; %10^-6*sin(omega*t);
+    if impulseY == 0
+        fPulseY = 0;
+    else
+        fPulseY = impulse(t,1,impulseY);
+    end
 end
 
 %omega = 314;
