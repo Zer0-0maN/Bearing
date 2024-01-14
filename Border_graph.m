@@ -1,9 +1,9 @@
-function graph = Border_graph(typeEnum,T1,imbalanceBool,forceXEnum,powerX,...
+function Border_graph(typeEnum,T1,imbalanceBool,forceXEnum,powerX,...
                 forceYEnum,powerY) %Название
 global deltaX deltaY
 deltaX=0.0002912; deltaY = 0.00005824;
 %Определение шага границы устойчивости и числа точек
-z = 0.001;
+z = 0.01;
 k = 40; 
 %Задание начальных параметров
 if typeEnum == 0 % Для эллиптического подшипника 
@@ -40,32 +40,6 @@ for i = 1:k
     x_el_d(i) = max(abs(h(:, 7)));
     y_el_d(i) = max(abs(h(:, 8)));
 end
-%Свойство печати
-set(0,'DefaultAxesFontSize',12,'DefaultAxesFontName','Times New Roman');
-set(0,'DefaultTextFontSize',12,'DefaultTextFontName','Times New Roman'); 
-%График для оси Х
-tiledlayout(2,1)
-graf1 = nexttile;
-plot(graf1,Z,x_el,'r-',Z,x_el_d,'b-')
-title(graf1,'В плоскости Х')  
-ylabel(graf1,'Перемещение')
-xlabel(graf1,'Значение a/c')
-legend(graf1,'Цапфа','Диск')
-grid on;
-%График для оси Y
-graf2 = nexttile;
-plot(graf2,Z,y_el,'r-',Z,y_el_d,'b-')
-title(graf2,'В плоскости Y')  
-ylabel(graf2,'Перемещение')
-xlabel(graf2,'Значение a/c')
-legend(graf2,'Цапфа','Диск')
-grid on;
-%Имя графика
-if typeEnum == 0 % Для эллиптического подшипника 
-    set(gcf,'Name', 'Эллиптический подшипник');
-end
-if typeEnum == 1 % Для сегментного подшипника 
-    set(gcf,'Name', 'Сегментный подшипник');
-end
-set(gcf,'Units', 'normalized', 'OuterPosition', [0 0.1 1 0.9]);
 
+%Построить график
+createGraph(x_el,x_el_d,y_el,y_el_d,Z,'Значение a/c',typeEnum);

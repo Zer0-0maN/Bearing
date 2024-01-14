@@ -1,22 +1,21 @@
-function f = func_segment(t,x,Z,forceXEnum,forceYEnum,powerX,powerY) 
-%Название
+function f = func_segment(t,x,Z,impulseX,powerX,impulseY,powerY) 
 
     function fPulseX = FPx(t)
-        if forceXEnum == 0
+        if impulseX == 0
             fPulseX = 0;
-        elseif forceXEnum == 1
+        elseif impulseX == 1
             fPulseX = impulse_force(t,200,powerX,300);
-        elseif forceXEnum == 2
+        elseif impulseX == 2
             fPulseX = linear_force(t,200,powerX,300);
         end
     end
     
     function fPulseY = FPy(t)
-        if forceYEnum == 0
+        if impulseY == 0
             fPulseY = 0;
-        elseif forceYEnum == 1
+        elseif impulseY == 1
             fPulseY = impulse_force(t,200,powerY,300);
-        elseif forceYEnum == 2
+        elseif impulseY == 2
             fPulseY = linear_force(t,200,powerY,300);
         end
     end
