@@ -1,4 +1,5 @@
-function graph = Moving_graph(typeEnum,T1,imbalanceBool,impulseBool) %Название
+function graph = Moving_graph(typeEnum,T1,imbalanceBool,...
+    forceXEnum,forceYEnum,powerX,powerY) 
 % [Test_block]
 % typeEnum = 0; %0 для эллиптического подшипника; 1 для сегментного;
 % T1 = 300;
@@ -24,10 +25,12 @@ y0 = f_numeric(4); dty0 = f_numeric(5); dt2y0 = f_numeric(6);
 xd0 = f_numeric(7); yd0 = f_numeric(8);
 %Решение уравнение
 if typeEnum == 0 % Для эллиптического подшипника 
-    func = @(t, y) func_elliptic(t, y, Z, impulseBool,impulseBool);
+    func = @(t, y) func_elliptic(t, y, Z,...
+        forceXEnum,forceYEnum,powerX,powerY);
 end
 if typeEnum == 1 % Для сегментного подшипника 
-    func = @(t, y) func_segment(t, y, Z, impulseBool,impulseBool);
+    func = @(t, y) func_segment(t, y, Z,...
+        forceXEnum,forceYEnum,powerX,powerY);
 end
 [t,h]=ode45(func,[0,T1],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
 %Свойство печати

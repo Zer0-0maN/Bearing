@@ -1,4 +1,5 @@
-function graph = Border_graph(typeEnum,T1,imbalanceBool) %Название
+function graph = Border_graph(typeEnum,T1,imbalanceBool,forceXEnum,powerX,...
+                forceYEnum,powerY) %Название
 global deltaX deltaY
 deltaX=0.0002912; deltaY = 0.00005824;
 %Определение шага границы устойчивости и числа точек
@@ -25,10 +26,12 @@ Z = zeros(1,k);
 for i = 1:k
     %Решение уравнение
     if typeEnum == 0 % Для эллиптического подшипника 
-        func = @(t, y) func_elliptic(t, y, z*(i-1));
+        func = @(t, y) func_elliptic(t, y, z*(i-1), forceXEnum,powerX,...
+                forceYEnum,powerY);
     end
     if typeEnum == 1 % Для сегментного подшипника 
-        func = @(t, y) func_segment(t, y, z*(i-1));
+        func = @(t, y) func_segment(t, y, z*(i-1), forceXEnum,powerX,...
+                forceYEnum,powerY);
     end
     [t,h]=ode45(func,[0,T1],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
     Z(i) = z*(i-1);
