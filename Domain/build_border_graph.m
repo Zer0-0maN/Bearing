@@ -1,8 +1,8 @@
-function build_border_graph(typeEnum,T1,imbalanceBool,forceXEnum,powerX,...
+function build_border_graph(enumRotor,T1,imbalanceBool,forceXEnum,powerX,...
                 forceYEnum,powerY,tForce,deltaT) %Название
 
 %Задание констант
-[I,E,deltaX,deltaY,sigma] = constant(typeEnum);
+[I,E,deltaX,deltaY,sigma,typeEnum] = constant(enumRotor);
 %Определение шага границы устойчивости и числа точек
 Zmax = border(I,E,sigma)*3/2;
 n = 100; %число точек

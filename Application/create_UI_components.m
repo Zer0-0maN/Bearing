@@ -1,10 +1,18 @@
-function [typeEnum,imbalanceBool,forceXEnum,powerX,...
+function [enumRotor,imbalanceBool,forceXEnum,powerX,...
     forceYEnum,powerY,Tforce,deltaT,Tmax] = create_UI_components(app)
     %Тип_подшипника
     if strcmp(app.BearingType.Value, 'Эллиптический')
-        typeEnum = 0;
+        enumRotor = 0;
+    elseif strcmp(app.BearingType.Value, 'Эллиптический с легким ротором')
+        enumRotor = 1;  
+    elseif strcmp(app.BearingType.Value, 'Эллиптический с "нулевым" ротором')
+        enumRotor = 2;
     elseif strcmp(app.BearingType.Value, 'Сегментный')
-        typeEnum = 1;
+        enumRotor = 3;
+    elseif strcmp(app.BearingType.Value, 'Сегментный с легким ротором')
+        enumRotor = 4;
+    elseif strcmp(app.BearingType.Value, 'Сегментный с "нулевым" ротором')
+        enumRotor = 5;
     end
     %Наличие_дисбаланса
     imbalanceBool = app.ImbalanceBox.Value;
