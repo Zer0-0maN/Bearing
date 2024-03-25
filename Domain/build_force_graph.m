@@ -1,4 +1,4 @@
-function create_force_graph (enumForce, Timpulse, Power, deltaT, Tmax)   
+function build_force_graph (enumForce, Timpulse, Power, deltaT, Tmax)   
 % Создание массива времени
 t = 0:0.1:Tmax;
 

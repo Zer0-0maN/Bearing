@@ -1,4 +1,4 @@
-function create_graph(x,xd,y,yd,t,string,typeEnum)
+function build_graph(x,xd,y,yd,t,string,typeEnum)
     %Свойство печати
     set(0,'DefaultAxesFontSize',12,'DefaultAxesFontName','Times New Roman');    
     tiledlayout(2,1)
