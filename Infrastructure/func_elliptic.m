@@ -1,11 +1,11 @@
-function f = func_elliptic(t,x,Z,enumForceX,powerX,enumForceY, ...
-                            powerY,Timpulse,deltaT,Wcoefficient) 
+function f = func_elliptic(t,x,Z,force_info_X,force_info_Y,...
+    time_info,Wcoefficient) 
     %Задание приложенного усилия
     function fPulseX = FPx(t)
-        fPulseX = change_force(t,enumForceX,powerX,Timpulse,deltaT);
+        fPulseX = change_force(t,force_info_X,time_info);
     end
     function fPulseY = FPy(t)    
-        fPulseY = change_force(t,enumForceY,powerY,Timpulse,deltaT);
+        fPulseY = change_force(t,force_info_Y,time_info);
     end
     %Константа перевода в безразмерное время
     omega = 1.667;

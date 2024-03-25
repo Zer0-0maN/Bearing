@@ -1,15 +1,9 @@
-function build_force_graph (enumForce, Timpulse, Power, deltaT, Tmax)   
+function build_force_graph (force_info,time_info)   
 % Создание массива времени
-t = 0:0.1:Tmax;
+t = 0:0.1:time_info.Tmax;
 
 % Вычисление силы для каждого момента времени
-    if enumForce == 0
-        result = zeros(size(t));
-    elseif enumForce == 1
-        result = linear_force(t,Timpulse,Power,deltaT);
-    elseif enumForce == 2
-        result = impulse_force(t,Timpulse,Power,deltaT);
-    end
+result = change_force(t,force_info,time_info);
 
 % Построение графика
 figure;
@@ -18,8 +12,8 @@ xlabel('Время (τ)');
 ylabel('Сила');
 title('Зависимость возмущающей силы от времени');
 hold on;
-xline(Timpulse, '--b', 'Label', 'τн', 'LabelHorizontalAlignment', 'left');
-xline(Timpulse + deltaT, '--b', 'Label', 'τн + δτ', ...
+xline(time_info.Tforce, '--b', 'Label', 'τн', 'LabelHorizontalAlignment', 'left');
+xline(time_info.Tforce + time_info.deltaT, '--b', 'Label', 'τн + δτ', ...
         'LabelHorizontalAlignment', 'right');
-yline(Power, '--b', 'Label', 'kQ');
+yline(force_info.power, '--b', 'Label', 'kQ');
 grid on;

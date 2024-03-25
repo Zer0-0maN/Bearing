@@ -1,8 +1,6 @@
 classdef Force_class
     properties
-        enumForceX
-        enumForceY
-        powerX
-        powerY
+        enumForce
+        power
     end
 end

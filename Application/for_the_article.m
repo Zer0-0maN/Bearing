@@ -5,13 +5,10 @@ enumRotor = 1; % 0 для эллиптического подшипника;
 imbalanceBool = 0; %0 без дисбаланса; 1 с дисбалансом ротора;
 Wcoef = 1;
 
-forceEnum = 1; %линейное; 
-
-%Power = 0;
-Power = 8.24;
-Timpulse = 31.416;
-deltaT = 4.7124;
-Tmax = 230;
+Power = Force_class();
+Power.power = 8.24;
+Power.enumForce = 1;    %линейное; 
+Time = time_constant();
 
 % Задание констант 
 [I,E,deltaX,deltaY,sigma,typeEnum] = constant(enumRotor);
@@ -22,16 +19,16 @@ Z = border(typeEnum)*5/4;
 %Z = (1 - coef)*Zborder;
 
 %Задание начальных параметров
-zero = startfunc_segment(0,imbalanceBool,deltaX,deltaY);
+zero = startfunc_segment(enumRotor,0,imbalanceBool);
 f_numeric = double(subs(zero,0));
 x0 = f_numeric(1); dtx0 = f_numeric(2); dt2x0 = f_numeric(3);
 y0 = f_numeric(4); dty0 = f_numeric(5); dt2y0 = f_numeric(6);
 xd0 = f_numeric(7); yd0 = f_numeric(8);
 %Решение уравнение
 func = @(t, y) func_segment(t, y, Z,...
-       forceEnum,Power,forceEnum,Power,Timpulse,deltaT,Wcoef);
+       Power,Power,Time,Wcoef);
 
-[t,h]=ode45(func,[0,Tmax],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
+[t,h]=ode45(func,[0,Time.Tmax],[x0,dtx0,dt2x0,y0,dty0,dt2y0,xd0,yd0]);
 %Построить график
 build_graph(h(:,1)*deltaX,h(:,7)*deltaX,h(:,4)*deltaY,h(:,8)*deltaY,t,'Время',typeEnum);
 

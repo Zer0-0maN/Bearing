@@ -1,22 +1,22 @@
-function result = impulse_force(t, T1, Power, deltaT)    
-    T2 = T1 + deltaT;
+function result = impulse_force(t, force_info,time_info)    
+    T1 = time_info.Tforce;
+    T2 = T1 + time_info.deltaT;
     result = zeros(size(t));  % Инициализация массива результатов нулями
+
     
     % Вычисление силы для каждого момента времени
     for i = 1:numel(t)
         if t(i) < T1
             result(i) = 0;
         elseif t(i) >= T1 && t(i) <= T2
-            result(i) = Power;
+            result(i) = force_info.power;
         else
             result(i) = 0;
         end
     end
 end
 
-
-
-  
+%Решение разложением в ряд  
 % f = Power * (0.092 * sin(t*pi/maxT) +...
 %     0.106 *(-1)* sin(2*t*pi/maxT) + 0.029 * sin(3*t*pi/maxT) +...
 %     0.071 * sin(4*t*pi/maxT) - 0.109 * sin(5*t*pi/maxT) +...

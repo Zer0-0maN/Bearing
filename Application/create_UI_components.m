@@ -1,5 +1,5 @@
-function [enumRotor,imbalanceBool,forceXEnum,powerX,...
-    forceYEnum,powerY,Tforce,deltaT,Tmax] = create_UI_components(app)
+function [enumRotor,imbalanceBool,force_info_X,...
+    force_info_Y,time_info] = create_UI_components(app)
     %Тип_подшипника
     if strcmp(app.BearingType.Value, 'Эллиптический(ОШИБКА)')
         enumRotor = 0;
@@ -12,28 +12,30 @@ function [enumRotor,imbalanceBool,forceXEnum,powerX,...
     end
     %Наличие_дисбаланса
     imbalanceBool = app.ImbalanceBox.Value;
-
+    %Задание силовых значений
+    force_info_X = Force_class();
     %Тип_горизонтального_нагружения
     if strcmp(app.ForceBoxX.Value, 'Отсутствует')
-        forceXEnum = 0;
+        force_info_X.enumForce = 0;
     elseif strcmp(app.ForceBoxX.Value, 'Линейное')
-        forceXEnum = 1;
+        force_info_X.enumForce = 1;
     elseif strcmp(app.ForceBoxX.Value, 'Импульсное')
-        forceXEnum = 2;
+        force_info_X.enumForce = 2;
     end
     %Горизонтальное_нагружение
-    powerX = app.EditForceX.Value;
+    force_info_X.power = app.EditForceX.Value;
 
-    %Тип_горизонтального_нагружения
+    force_info_Y = Force_class();
+    %Тип_вертикального_нагружения
     if strcmp(app.ForceBoxY.Value, 'Отсутствует')
-        forceYEnum = 0;
+        force_info_Y.enumForce = 0;
     elseif strcmp(app.ForceBoxY.Value, 'Линейное')
-        forceYEnum = 1;
+        force_info_Y.enumForce = 1;
     elseif strcmp(app.ForceBoxY.Value, 'Импульсное')
-        forceYEnum = 2;
+        force_info_Y.enumForce = 2;
     end
     %Вертикальное_нагружение
-    powerY = app.EditForceY.Value;
+    force_info_Y.power = app.EditForceY.Value;
     %Временные значения. Пока константы. 
-    [Tforce,deltaT,Tmax] = time_constant();
+    [time_info] = time_constant();
 end
